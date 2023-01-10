@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/BreedsFragment">
+
+    <action
+        android:id="@+id/go_to_Favorites"
+        app:destination="@+id/FavoritePicturesFragment"/>
+
+    <fragment
+        android:id="@+id/BreedsFragment"
+        android:name="com.playground.doggies.presentation.breedlist.BreedListFragment"
+        android:label="Breeds"
+        tools:layout="@layout/fragment_breedlist">
+        <action
+            android:id="@+id/action_BreedList_to_BreedPictures"
+            app:destination="@+id/BreedsPicturesFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/BreedsPicturesFragment"
+        android:name="com.playground.doggies.presentation.breedpics.BreedPicsFragment"
+        android:label="Pictures"
+        tools:layout="@layout/fragment_breedlist">
+        <argument
+            android:name="breedName"
+            app:argType="string"
+            android:defaultValue=""/>
+        <argument
+            android:name="subBreedName"
+            app:argType="string"
+            android:defaultValue=""/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/FavoritePicturesFragment"
+        android:name="com.playground.doggies.presentation.favorites.FavoritePicturesFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_breedlist"/>
+
+</navigation>
