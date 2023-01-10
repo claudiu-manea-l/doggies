@@ -8,11 +8,11 @@ plugins {
 
 android {
     namespace 'com.playground.doggies.presentation'
-    compileSdk ProjectConfig.compileSdk
+    compileSdk Config.compileSdk
 
     defaultConfig {
         minSdk 21
-        targetSdk ProjectConfig.targetSdk
+        targetSdk Config.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

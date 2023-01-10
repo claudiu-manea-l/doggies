@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace 'com.playground.doggies'
-    compileSdk ProjectConfig.compileSdk
+    compileSdk Config.compileSdk
 
     defaultConfig {
         applicationId "com.playground.doggies"
         minSdk 21
-        targetSdk ProjectConfig.targetSdk
+        targetSdk Config.targetSdk
         versionCode 1
         versionName "1.0"
 
