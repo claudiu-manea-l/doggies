@@ -70,10 +70,14 @@ fun parseBreed(url: String, breed: Breed): Breed {
         ?.get(1)
         ?.value
         ?.split("-")
-        ?.get(1)
         ?.let {
-            breed.copy(
-                subBreed = it
-            )
+            if (it.size > 1) {
+                breed.copy(
+                    subBreed = it[1]
+                )
+            } else {
+                breed
+            }
         } ?: breed
+
 }
