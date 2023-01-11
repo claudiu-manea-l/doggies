@@ -5,6 +5,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.playground.doggies.presentation.R
 import com.playground.doggies.presentation.common.RecyclerViewFragment
@@ -17,12 +18,7 @@ class FavoritePicturesFragment : RecyclerViewFragment<FavoritePicturesViewData>(
     private lateinit var adapter: FavoritePicsAdapter
 
     override fun onInitView() {
-        requireActivity()
-            .addMenuProvider(
-                SearchMenuProvider {
-                    viewModel.onFilterPics(it)
-                }
-            )
+        addSearchMenu { viewModel.onFilterPics(it) }
         adapter = FavoritePicsAdapter {
             viewModel.onPictureClicked(it)
         }
@@ -34,23 +30,32 @@ class FavoritePicturesFragment : RecyclerViewFragment<FavoritePicturesViewData>(
     }
 }
 
+private fun Fragment.addSearchMenu(onSearch: (String) -> Unit) {
+    requireActivity()
+        .addMenuProvider(
+            SearchMenuProvider {
+                onSearch(it)
+            }
+        )
+}
+
 class SearchMenuProvider(
-    private val onSearchText:(String)->Unit
+    private val onSearchText: (String) -> Unit
 ) : MenuProvider {
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.menu_serach,menu)
+        menuInflater.inflate(R.menu.menu_serach, menu)
         menu.findItem(R.id.action_search)
             .actionView
             .let { it as? SearchView }
             ?.setOnQueryTextListener(
                 object : SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
-                        onSearchText(query?:"")
+                        onSearchText(query ?: "")
                         return true
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        onSearchText(newText?:"")
+                        onSearchText(newText ?: "")
                         return true
                     }
                 }
